@@ -12,76 +12,93 @@
     body {
       margin: 0;
       font-family: Arial, "Microsoft JhengHei", sans-serif;
-      background: #111827;
+      background: #020617;
       color: white;
     }
 
     .container {
-      max-width: 1200px;
+      width: 100%;
+      max-width: 1800px;
       margin: auto;
-      padding: 16px;
-    }
-
-    h1 {
-      text-align: center;
-      margin: 12px 0 20px;
+      padding: 12px;
     }
 
     .scoreboard {
       display: grid;
-      grid-template-columns: 1fr 260px 1fr;
-      gap: 16px;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
       align-items: stretch;
     }
 
-    .team, .center-panel, .control-panel {
-      background: #1f2937;
-      border-radius: 16px;
+    .team,
+    .center-panel,
+    .control-panel {
+      background: #111827;
+      border-radius: 18px;
       padding: 16px;
-      box-shadow: 0 0 12px rgba(0,0,0,.35);
+      box-shadow: 0 0 16px rgba(0, 0, 0, 0.45);
+    }
+
+    .center-panel {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
 
     .team-name {
       width: 100%;
-      font-size: 28px;
+      font-size: clamp(34px, 5vw, 76px);
       text-align: center;
-      background: #374151;
+      background: #1f2937;
       color: white;
       border: none;
-      border-radius: 8px;
+      border-radius: 10px;
       padding: 8px;
-      margin-bottom: 16px;
+      font-weight: bold;
+    }
+
+    .team-name:focus {
+      outline: 3px solid #38bdf8;
     }
 
     .score {
-      font-size: 110px;
-      font-weight: bold;
+      font-size: clamp(150px, 18vw, 320px);
+      font-weight: 900;
       text-align: center;
       color: #facc15;
-      line-height: 1;
-      margin-bottom: 16px;
-    }
-
-    .clock {
-      font-size: 64px;
-      font-weight: bold;
-      text-align: center;
-      color: #38bdf8;
-      margin: 10px 0;
-    }
-
-    .shot-clock {
-      font-size: 80px;
-      font-weight: bold;
-      text-align: center;
-      color: #fb7185;
-      margin: 10px 0;
+      line-height: 0.95;
+      margin: 20px 0;
     }
 
     .period {
       text-align: center;
-      font-size: 28px;
-      margin: 8px 0;
+      font-size: clamp(56px, 7vw, 110px);
+      font-weight: 900;
+      color: #e5e7eb;
+    }
+
+    .clock {
+      font-size: clamp(110px, 13vw, 230px);
+      font-weight: 900;
+      text-align: center;
+      color: #38bdf8;
+      line-height: 1;
+      margin: 24px 0;
+    }
+
+    .shot-clock {
+      font-size: clamp(70px, 8vw, 130px);
+      font-weight: 900;
+      text-align: center;
+      color: #fb7185;
+      line-height: 1;
+      margin: 12px 0;
+    }
+
+    .small-info {
+      font-size: 30px;
+      text-align: center;
+      margin-top: 14px;
     }
 
     .row {
@@ -101,10 +118,15 @@
       cursor: pointer;
       background: #374151;
       color: white;
+      touch-action: manipulation;
     }
 
     button:hover {
       background: #4b5563;
+    }
+
+    button:active {
+      transform: scale(0.98);
     }
 
     .primary {
@@ -123,21 +145,95 @@
       background: #16a34a;
     }
 
-    .small-info {
-      font-size: 22px;
-      text-align: center;
+    .control-panel {
       margin-top: 12px;
     }
 
-    .control-panel {
-      margin-top: 16px;
+    .control-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
     }
 
-    .control-title {
-      font-size: 22px;
+    .toggle-area {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      align-items: center;
+    }
+
+    .toggle-area label {
+      font-size: 16px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      white-space: nowrap;
+    }
+
+    input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+    }
+
+    input[type="number"] {
+      width: 64px;
+      font-size: 18px;
+      padding: 6px;
+      border-radius: 8px;
+      border: none;
       text-align: center;
-      margin-bottom: 8px;
-      color: #d1d5db;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    body.display-mode .score-buttons,
+    body.display-mode .foul-buttons,
+    body.display-mode .timeout-buttons,
+    body.display-mode .clock-buttons,
+    body.display-mode .period-buttons,
+    body.display-mode .shot-buttons {
+      display: none !important;
+    }
+
+    body.display-mode .container {
+      max-width: none;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    body.display-mode .scoreboard {
+      flex: 1;
+    }
+
+    body.display-mode .team,
+    body.display-mode .center-panel {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    body.display-mode .control-panel {
+      background: rgba(17, 24, 39, 0.75);
+      padding: 8px;
+    }
+
+    body.display-mode .score {
+      font-size: clamp(180px, 21vw, 380px);
+    }
+
+    body.display-mode .clock {
+      font-size: clamp(130px, 15vw, 260px);
+    }
+
+    body.display-mode .team-name {
+      background: transparent;
+      border: none;
     }
 
     @media (max-width: 900px) {
@@ -145,103 +241,144 @@
         grid-template-columns: 1fr;
       }
 
-      .score {
-        font-size: 86px;
+      .control-bar {
+        justify-content: center;
       }
 
-      .clock {
-        font-size: 54px;
+      .toggle-area {
+        justify-content: center;
       }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>籃球計分板</h1>
-
     <div class="scoreboard">
       <div class="team">
-        <input id="teamAName" class="team-name" value="HOME" onchange="save()" />
+        <input id="teamAName" class="team-name" value="HOME" oninput="save()" />
         <div id="scoreA" class="score">0</div>
 
-        <div class="row">
+        <div class="row score-buttons">
           <button onclick="addScore('A', 1)">+1</button>
           <button onclick="addScore('A', 2)">+2</button>
           <button onclick="addScore('A', 3)">+3</button>
           <button onclick="addScore('A', -1)">-1</button>
         </div>
 
-        <div class="small-info">犯規：<span id="foulA">0</span></div>
-        <div class="row">
-          <button onclick="addFoul('A', 1)">犯規 +1</button>
-          <button onclick="addFoul('A', -1)">犯規 -1</button>
+        <div id="foulPanelA">
+          <div class="small-info">犯規：<span id="foulA">0</span></div>
+          <div class="row foul-buttons">
+            <button onclick="addFoul('A', 1)">+1</button>
+            <button onclick="addFoul('A', -1)">-1</button>
+          </div>
         </div>
 
-        <div class="small-info">暫停：<span id="timeoutA">0</span></div>
-        <div class="row">
-          <button onclick="addTimeout('A', 1)">暫停 +1</button>
-          <button onclick="addTimeout('A', -1)">暫停 -1</button>
+        <div id="timeoutPanelA">
+          <div class="small-info">暫停：<span id="timeoutA">0</span></div>
+          <div class="row timeout-buttons">
+            <button onclick="addTimeout('A', 1)">+1</button>
+            <button onclick="addTimeout('A', -1)">-1</button>
+          </div>
         </div>
       </div>
 
       <div class="center-panel">
-        <div class="period">第 <span id="period">1</span> 節</div>
+        <div class="period">
+          第 <span id="period">1</span> 節
+        </div>
 
-        <div id="gameClock" class="clock">10:00</div>
-        <div class="row">
+        <div id="gameClock" class="clock">20:00</div>
+
+        <div class="row clock-buttons">
           <button class="primary" onclick="toggleGameClock()">開始 / 暫停</button>
-          <button onclick="resetGameClock()">重設</button>
+          <button onclick="resetGameClock()">重設時間</button>
         </div>
 
-        <div id="shotClock" class="shot-clock">24</div>
-        <div class="row">
-          <button class="warning" onclick="resetShotClock(24)">24秒</button>
-          <button class="warning" onclick="resetShotClock(14)">14秒</button>
+        <div id="shotClockPanel">
+          <div id="shotClock" class="shot-clock">24</div>
+          <div class="row shot-buttons">
+            <button class="warning" onclick="resetShotClock(24)">24秒</button>
+            <button class="warning" onclick="resetShotClock(14)">14秒</button>
+          </div>
         </div>
 
-        <div class="row">
+        <div class="row period-buttons">
           <button onclick="prevPeriod()">上一節</button>
           <button onclick="nextPeriod()">下一節</button>
         </div>
       </div>
 
       <div class="team">
-        <input id="teamBName" class="team-name" value="AWAY" onchange="save()" />
+        <input id="teamBName" class="team-name" value="AWAY" oninput="save()" />
         <div id="scoreB" class="score">0</div>
 
-        <div class="row">
+        <div class="row score-buttons">
           <button onclick="addScore('B', 1)">+1</button>
           <button onclick="addScore('B', 2)">+2</button>
           <button onclick="addScore('B', 3)">+3</button>
           <button onclick="addScore('B', -1)">-1</button>
         </div>
 
-        <div class="small-info">犯規：<span id="foulB">0</span></div>
-        <div class="row">
-          <button onclick="addFoul('B', 1)">犯規 +1</button>
-          <button onclick="addFoul('B', -1)">犯規 -1</button>
+        <div id="foulPanelB">
+          <div class="small-info">犯規：<span id="foulB">0</span></div>
+          <div class="row foul-buttons">
+            <button onclick="addFoul('B', 1)">+1</button>
+            <button onclick="addFoul('B', -1)">-1</button>
+          </div>
         </div>
 
-        <div class="small-info">暫停：<span id="timeoutB">0</span></div>
-        <div class="row">
-          <button onclick="addTimeout('B', 1)">暫停 +1</button>
-          <button onclick="addTimeout('B', -1)">暫停 -1</button>
+        <div id="timeoutPanelB">
+          <div class="small-info">暫停：<span id="timeoutB">0</span></div>
+          <div class="row timeout-buttons">
+            <button onclick="addTimeout('B', 1)">+1</button>
+            <button onclick="addTimeout('B', -1)">-1</button>
+          </div>
         </div>
       </div>
     </div>
 
     <div class="control-panel">
-      <div class="control-title">控制區</div>
-      <div class="row">
-        <button class="success" onclick="fullscreen()">全螢幕</button>
-        <button onclick="swapTeams()">交換隊伍</button>
-        <button class="danger" onclick="resetAll()">重置比賽</button>
+      <div class="control-bar">
+        <div class="row">
+          <button class="primary" onclick="toggleDisplayMode()" id="modeButton">主畫面模式</button>
+          <button class="success" onclick="fullscreen()">全螢幕</button>
+          <button onclick="swapTeams()">交換隊伍</button>
+          <button class="danger" onclick="resetAll()">重置比賽</button>
+        </div>
+
+        <div class="toggle-area">
+          <label>
+            <input type="checkbox" id="showFouls" onchange="togglePanels(); save();" />
+            犯規
+          </label>
+
+          <label>
+            <input type="checkbox" id="showTimeouts" onchange="togglePanels(); save();" />
+            暫停
+          </label>
+
+          <label>
+            <input type="checkbox" id="showShotClock" onchange="togglePanels(); save();" />
+            24秒
+          </label>
+
+          <label>
+            每節
+            <input type="number" id="periodMinutes" min="1" value="20" onchange="applySettings()" />
+            分
+          </label>
+
+          <label>
+            節數
+            <input type="number" id="totalPeriods" min="1" value="2" onchange="applySettings()" />
+          </label>
+        </div>
       </div>
     </div>
   </div>
 
   <script>
-    const STORAGE_KEY = "basketball-scoreboard";
+    const STORAGE_KEY = "basketball-scoreboard-v5";
 
     let state = {
       teamAName: "HOME",
@@ -253,8 +390,14 @@
       timeoutA: 0,
       timeoutB: 0,
       period: 1,
-      gameSeconds: 600,
-      shotSeconds: 24
+      totalPeriods: 2,
+      periodMinutes: 20,
+      gameSeconds: 1200,
+      shotSeconds: 24,
+      showFouls: false,
+      showTimeouts: false,
+      showShotClock: false,
+      displayMode: false
     };
 
     let gameTimer = null;
@@ -263,35 +406,97 @@
     function load() {
       const saved = localStorage.getItem(STORAGE_KEY);
       if (saved) {
-        state = JSON.parse(saved);
+        try {
+          state = { ...state, ...JSON.parse(saved) };
+        } catch (error) {
+          localStorage.removeItem(STORAGE_KEY);
+        }
       }
+
       render();
     }
 
     function save() {
       state.teamAName = document.getElementById("teamAName").value;
       state.teamBName = document.getElementById("teamBName").value;
+      state.showFouls = document.getElementById("showFouls").checked;
+      state.showTimeouts = document.getElementById("showTimeouts").checked;
+      state.showShotClock = document.getElementById("showShotClock").checked;
+      state.periodMinutes = Math.max(1, Number(document.getElementById("periodMinutes").value || 20));
+      state.totalPeriods = Math.max(1, Number(document.getElementById("totalPeriods").value || 2));
+
       localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
     }
 
     function render() {
       document.getElementById("teamAName").value = state.teamAName;
       document.getElementById("teamBName").value = state.teamBName;
+
       document.getElementById("scoreA").innerText = state.scoreA;
       document.getElementById("scoreB").innerText = state.scoreB;
+
       document.getElementById("foulA").innerText = state.foulA;
       document.getElementById("foulB").innerText = state.foulB;
+
       document.getElementById("timeoutA").innerText = state.timeoutA;
       document.getElementById("timeoutB").innerText = state.timeoutB;
+
       document.getElementById("period").innerText = state.period;
       document.getElementById("gameClock").innerText = formatTime(state.gameSeconds);
       document.getElementById("shotClock").innerText = state.shotSeconds;
+
+      document.getElementById("showFouls").checked = state.showFouls;
+      document.getElementById("showTimeouts").checked = state.showTimeouts;
+      document.getElementById("showShotClock").checked = state.showShotClock;
+
+      document.getElementById("periodMinutes").value = state.periodMinutes;
+      document.getElementById("totalPeriods").value = state.totalPeriods;
+
+      document.body.classList.toggle("display-mode", state.displayMode);
+      document.getElementById("modeButton").innerText = state.displayMode ? "控制台模式" : "主畫面模式";
+
+      togglePanels();
       save();
     }
 
+    function toggleDisplayMode() {
+      state.displayMode = !state.displayMode;
+      render();
+    }
+
+    function togglePanels() {
+      const showFouls = document.getElementById("showFouls").checked;
+      const showTimeouts = document.getElementById("showTimeouts").checked;
+      const showShotClock = document.getElementById("showShotClock").checked;
+
+      document.getElementById("foulPanelA").classList.toggle("hidden", !showFouls);
+      document.getElementById("foulPanelB").classList.toggle("hidden", !showFouls);
+
+      document.getElementById("timeoutPanelA").classList.toggle("hidden", !showTimeouts);
+      document.getElementById("timeoutPanelB").classList.toggle("hidden", !showTimeouts);
+
+      document.getElementById("shotClockPanel").classList.toggle("hidden", !showShotClock);
+    }
+
+    function applySettings() {
+      const nextPeriodMinutes = Math.max(1, Number(document.getElementById("periodMinutes").value || 20));
+      const nextTotalPeriods = Math.max(1, Number(document.getElementById("totalPeriods").value || 2));
+
+      state.periodMinutes = nextPeriodMinutes;
+      state.totalPeriods = nextTotalPeriods;
+      state.gameSeconds = state.periodMinutes * 60;
+
+      if (state.period > state.totalPeriods) {
+        state.period = state.totalPeriods;
+      }
+
+      render();
+    }
+
     function formatTime(seconds) {
-      const m = Math.floor(seconds / 60);
-      const s = seconds % 60;
+      const safeSeconds = Math.max(0, Number(seconds || 0));
+      const m = Math.floor(safeSeconds / 60);
+      const s = safeSeconds % 60;
       return `${m}:${s.toString().padStart(2, "0")}`;
     }
 
@@ -301,6 +506,7 @@
       } else {
         state.scoreB = Math.max(0, state.scoreB + points);
       }
+
       render();
     }
 
@@ -310,6 +516,7 @@
       } else {
         state.foulB = Math.max(0, state.foulB + value);
       }
+
       render();
     }
 
@@ -319,15 +526,13 @@
       } else {
         state.timeoutB = Math.max(0, state.timeoutB + value);
       }
+
       render();
     }
 
     function toggleGameClock() {
       if (gameTimer) {
-        clearInterval(gameTimer);
-        clearInterval(shotTimer);
-        gameTimer = null;
-        shotTimer = null;
+        stopTimers();
         return;
       }
 
@@ -341,19 +546,28 @@
         }
       }, 1000);
 
-      shotTimer = setInterval(() => {
-        if (state.shotSeconds > 0) {
-          state.shotSeconds--;
-          render();
-        } else {
-          clearInterval(shotTimer);
-          shotTimer = null;
-        }
-      }, 1000);
+      if (state.showShotClock) {
+        shotTimer = setInterval(() => {
+          if (state.shotSeconds > 0) {
+            state.shotSeconds--;
+            render();
+          } else {
+            clearInterval(shotTimer);
+            shotTimer = null;
+          }
+        }, 1000);
+      }
+    }
+
+    function stopTimers() {
+      clearInterval(gameTimer);
+      clearInterval(shotTimer);
+      gameTimer = null;
+      shotTimer = null;
     }
 
     function resetGameClock() {
-      state.gameSeconds = 600;
+      state.gameSeconds = state.periodMinutes * 60;
       render();
     }
 
@@ -364,7 +578,7 @@
 
     function nextPeriod() {
       state.period++;
-      state.gameSeconds = 600;
+      state.gameSeconds = state.periodMinutes * 60;
       state.shotSeconds = 24;
       state.foulA = 0;
       state.foulB = 0;
@@ -403,6 +617,8 @@
     function resetAll() {
       if (!confirm("確定要重置整場比賽嗎？")) return;
 
+      stopTimers();
+
       state = {
         teamAName: "HOME",
         teamBName: "AWAY",
@@ -413,14 +629,15 @@
         timeoutA: 0,
         timeoutB: 0,
         period: 1,
-        gameSeconds: 600,
-        shotSeconds: 24
+        totalPeriods: 2,
+        periodMinutes: 20,
+        gameSeconds: 1200,
+        shotSeconds: 24,
+        showFouls: false,
+        showTimeouts: false,
+        showShotClock: false,
+        displayMode: false
       };
-
-      clearInterval(gameTimer);
-      clearInterval(shotTimer);
-      gameTimer = null;
-      shotTimer = null;
 
       render();
     }
