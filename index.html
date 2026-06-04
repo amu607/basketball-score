@@ -50,6 +50,36 @@
       justify-content: center;
     }
 
+    /* 主隊格：白底黑字 */
+    .team-home {
+      background: #ffffff;
+      color: #000000;
+    }
+
+    .team-home .score {
+      color: #000000;
+    }
+
+    .team-home .team-name {
+      background: #e5e7eb;
+      color: #000000;
+    }
+
+    /* 客隊格：黑底白字 */
+    .team-away {
+      background: #000000;
+      color: #ffffff;
+    }
+
+    .team-away .score {
+      color: #ffffff;
+    }
+
+    .team-away .team-name {
+      background: #1f2937;
+      color: #ffffff;
+    }
+
     .team-name {
       width: 100%;
       font-size: clamp(34px, 5vw, 76px);
@@ -170,6 +200,17 @@
 
     .hidden {
       display: none !important;
+    }
+
+    .app-version {
+      position: fixed;
+      right: 8px;
+      bottom: 6px;
+      font-size: 13px;
+      color: rgba(148, 163, 184, 0.7);
+      font-family: monospace;
+      pointer-events: none;
+      z-index: 9999;
     }
 
     .score-control {
@@ -347,7 +388,7 @@
 <body>
   <div class="container">
     <div class="scoreboard">
-      <div class="team">
+      <div class="team team-home">
         <input id="teamAName" class="team-name" value="HOME" oninput="save()" />
         <div id="scoreA" class="score">0</div>
       </div>
@@ -370,7 +411,7 @@
         </div>
       </div>
 
-      <div class="team">
+      <div class="team team-away">
         <input id="teamBName" class="team-name" value="AWAY" oninput="save()" />
         <div id="scoreB" class="score">0</div>
       </div>
@@ -422,6 +463,8 @@
       </div>
     </div>
   </div>
+
+  <div class="app-version">v1.0.1</div>
 
   <script>
     const STORAGE_KEY = "basketball-scoreboard-v6";
